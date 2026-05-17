@@ -81,10 +81,16 @@ function win(board) {
         [0, 4, 8],
         [2, 4, 6]
     ];
+    if (!Gameboard.board.includes(null)) {
+        console.log("HI")
+        document.getElementById("winner").textContent = "It's a draw";
+        document.getElementById("winner-container").hidden = false;
+        Gameboard.gameOver = true;
+    }
 
     for (const [a, b, c] of winningCombos) {
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            document.getElementById("winner").textContent = Gameboard.actualPlayer.name;
+            document.getElementById("winner").textContent = Gameboard.actualPlayer.name + " win the game!";
             document.getElementById("winner-container").hidden = false;
             Gameboard.gameOver = true;
             return;
@@ -138,9 +144,10 @@ function resetBoard() {
     Gameboard.board.fill(null);
     Gameboard.actualPlayer = Gameboard.player1;
     boardEl.innerHTML = "";
-    gameOver = false;
+    Gameboard.gameOver = false;
     Gameboard.createBoard();
     document.getElementById("winner-container").hidden = true;
+    console.log(Gameboard.board)
 };
 
 function capitalize(str) {

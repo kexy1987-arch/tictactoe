@@ -184,5 +184,7 @@ button{
     background-color: aquamarine;
     padding: 30px;
     border-radius: 20px;
-
+    font-size:x-large;
+    font-weight: 800;
+    color: rgb(185, 0, 185);
 }
