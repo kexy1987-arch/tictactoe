@@ -48,9 +48,8 @@ const Gameboard = (function() {
             square.classList.add("square");
             square.id = index
             boardEl.appendChild(square);
-            square.addEventListener("click", (e) => {
-                round(e, index);
-            })
+            square._handler = (e) => handleClick(e, index);
+            square.addEventListener("click", square._handler);
         });
     };
 
@@ -140,7 +139,15 @@ function round(e, index) {
 const clearBoardBtn = document.getElementById("clear-board-btn");
 clearBoardBtn.addEventListener("click", () => resetBoard());
 
+function handleClick(e, index){
+    round(e, index);
+}
+
 function resetBoard() {
+    document.querySelectorAll(".square").forEach(square => {
+        square.removeEventListener("click", square._handler);
+    });
+
     Gameboard.board.fill(null);
     Gameboard.actualPlayer = Gameboard.player1;
     boardEl.innerHTML = "";
