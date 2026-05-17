@@ -24,8 +24,8 @@ const GetPlayersName = (function() {
         setTimeout(() => {
             form.hidden = true;
         }, 2000);
-        Gameboard.player1.name = capitalize(player1Input.value);
-        Gameboard.player2.name = capitalize(player2Input.value);
+        Gameboard.player1.name = player1Input.value !== "" ? capitalize(player1Input.value) : "Player 1";
+        Gameboard.player2.name = player2Input.value !== "" ? capitalize(player2Input.value) : "Player 2";
         player1Name.textContent = Gameboard.player1.name;
         player2Name.textContent = Gameboard.player2.name;
     })
@@ -49,7 +49,7 @@ const Gameboard = (function() {
             square.id = index
             boardEl.appendChild(square);
             square._handler = (e) => handleClick(e, index);
-            square.addEventListener("click", square._handler);
+        square.addEventListener("click", square._handler);
         });
     };
 
@@ -81,7 +81,6 @@ function win(board) {
         [2, 4, 6]
     ];
     if (!Gameboard.board.includes(null)) {
-        console.log("HI")
         document.getElementById("winner").textContent = "It's a draw";
         document.getElementById("winner-container").hidden = false;
         Gameboard.gameOver = true;
@@ -89,6 +88,7 @@ function win(board) {
 
     for (const [a, b, c] of winningCombos) {
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            Gameboard.actualPlayer.score += 1;            
             document.getElementById("winner").textContent = Gameboard.actualPlayer.name + " win the game!";
             document.getElementById("winner-container").hidden = false;
             Gameboard.gameOver = true;
@@ -147,14 +147,16 @@ function resetBoard() {
     document.querySelectorAll(".square").forEach(square => {
         square.removeEventListener("click", square._handler);
     });
-
+    console.log(Gameboard.actualPlayer)
     Gameboard.board.fill(null);
     Gameboard.actualPlayer = Gameboard.player1;
     boardEl.innerHTML = "";
     Gameboard.gameOver = false;
     Gameboard.createBoard();
     document.getElementById("winner-container").hidden = true;
-    console.log(Gameboard.board)
+    document.getElementById("score1").textContent = `Score: ${Gameboard.player1.score}`;
+    document.getElementById("score2").textContent = `Score: ${Gameboard.player2.score}`;
+    
 };
 
 function capitalize(str) {
