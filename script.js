@@ -140,7 +140,7 @@ function resetBoard() {
     boardEl.innerHTML = "";
     gameOver = false;
     Gameboard.createBoard();
-    document.getElementById("winner-container").hidden = false;
+    document.getElementById("winner-container").hidden = true;
 };
 
 function capitalize(str) {
