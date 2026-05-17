@@ -7,27 +7,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Tic Tac Toe</h1>
-    <div id="players">
+    <header>
+        <h1>Tic Tac Toe</h1>
         <div>
-            <span id="player1-name"></span>
-            <span>X</span>
+            <div>
+                <span id="player1-name"></span>
+                <span>: X</span>
+            </div>
+            <div>
+                <span id="player2-name"></span>
+                <span>: O</span>
+            </div>
         </div>
-        <div>
-            <span id="player2-name"></span>
-            <span>O</span>
-        </div>
-    </div>
+    </header>
     <div id="board">
     </div>
-    <form>
-        <label for="player1">Player 1 name:</label>
-        <input id="player1" type="text">
-        <label for="player2">Player 2 name:</label>
-        <input id="player2" type="text">
+    <form id="get-player" class="get-player">
+        <label for="player1">Player 1 name:<input id="player1" type="text"></label>
+        
+        <label for="player2">Player 2 name:<input id="player2" type="text"></label>
+        
         <button type="submit">Play</button>
     </form>
-    <modal>
+    <modal id="winner-container" hidden>
         <p><span id="winner"></span> win the game!</p>
         <button type="button" id="clear-board-btn">Clear Board</button>
     </modal>
